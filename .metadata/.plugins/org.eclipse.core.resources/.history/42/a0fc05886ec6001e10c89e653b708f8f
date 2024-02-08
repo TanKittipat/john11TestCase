@@ -1,0 +1,37 @@
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+class TestCustomer {
+
+	@Test
+	void testInput() throws InterruptedException {
+		WebDriver driver = null;
+        System.setProperty("webdriver.chrome.driver", "D:\\webdriver\\chromedriver-win64\\chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.get("http://127.0.0.1/customer/customer.php");
+        
+        WebElement name = driver.findElement(By.id("firstName"));
+        WebElement last = driver.findElement(By.id("lastName"));
+        WebElement age = driver.findElement(By.id("age"));
+        Select drp_title = new Select(driver.findElement(By.id("title")));
+		drp_title.selectByIndex(0);
+		
+		name.sendKeys("Kittipat");
+		last.sendKeys("Choowongwan");
+		age.sendKeys("19");
+        
+		Thread.sleep(2500);
+		WebElement submit = driver.findElement(By.id("submit"));
+		submit.sendKeys(Keys.ENTER);
+		Thread.sleep(5000);
+        driver.close();
+	}
+
+}
